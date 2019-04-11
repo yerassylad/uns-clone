@@ -11,6 +11,18 @@ export class App extends Component {
     updateScreenSizes(screenSizes);
   }, 150)
 
+  _determineDeviceType = () => {
+    const {screenSizes} = this.props;
+    const screenWidth = screenSizes.viewPortWidth;
+    if (screenWidth > 991) {
+      return 3;
+    } else if (screenWidth <= 991 && screenWidth > 479) {
+      return 2;
+    } else if (screenWidth <= 479) {
+      return 1
+    }
+  }
+
   componentDidMount = () => {
     window.addEventListener('resize', this._debouncedScreenSizesUpdater)
     this._debouncedScreenSizesUpdater()
@@ -22,6 +34,7 @@ export class App extends Component {
 
   render() {
     const {screenSizes} = this.props;
+    const deviceType = this._determineDeviceType();
     return (
       <div>
         screenSize
@@ -29,7 +42,12 @@ export class App extends Component {
           width: {screenSizes.viewPortWidth}
         </div>
         <div>
-          width: {screenSizes.viewPortHeight}
+          height: {screenSizes.viewPortHeight}
+        </div>
+        <div>
+          {deviceType === 1 && "mobile"}
+          {deviceType === 2 && "tablet"}
+          {deviceType === 3 && "desktop"}
         </div>
       </div>
     )
