@@ -1,25 +1,44 @@
-import React, { Component } from 'react'
-import determineScreenSize from './libs/determineScreenSize'
+import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import determineScreenSize from './libs/determineScreenSize';
 import debounce from './libs/debounce';
-
-const debouncedScreenSize = debounce(determineScreenSize, 150);
+import updateScreenSizes from './actions/Core/updateScreenSizes';
 
 export class App extends Component {
+  _debouncedScreenSizesUpdater = debounce(() => {
+    const {updateScreenSizes} = this.props;
+    const screenSizes = determineScreenSize();
+    updateScreenSizes(screenSizes);
+  }, 150)
+
   componentDidMount = () => {
-    window.addEventListener('resize', debouncedScreenSize)
+    window.addEventListener('resize', this._debouncedScreenSizesUpdater)
+    this._debouncedScreenSizesUpdater()
   }
 
   componentWillMount = () => {
-    window.removeEventListener('resize', debouncedScreenSize)
+    window.removeEventListener('resize', this._debouncedScreenSizesUpdater)
   }
 
   render() {
+    const {screenSizes} = this.props;
     return (
       <div>
         screenSize
+        <div>
+          width: {screenSizes.viewPortWidth}
+        </div>
+        <div>
+          width: {screenSizes.viewPortHeight}
+        </div>
       </div>
     )
   }
 }
 
-export default App
+const mapStateToProps = state => ({
+  screenSizes: state.core.screenSizes
+})
+
+
+export default connect(mapStateToProps, {updateScreenSizes})(App);

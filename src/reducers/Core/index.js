@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import core from './Core'
+import screenSizes from './screenSizesReducer'
 
 export default combineReducers({
-    core
+    screenSizes
 });

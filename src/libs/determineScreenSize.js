@@ -16,9 +16,7 @@ const determineScreenSize = () => {
         screenSizes.viewPortWidth = document.getElementsByTagName('body')[0].clientWidth;
         screenSizes.viewPortHeight = document.getElementsByTagName('body')[0].clientHeight;
     }
-
-    console.log(screenSizes);
-    
+   
     return screenSizes;
 }
 
