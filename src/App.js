@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import determineScreenSize from "./libs/determineScreenSize";
 import debounce from "./libs/debounce";
@@ -9,6 +9,8 @@ import Mobile from "./components/Mobile";
 import PhotoOfTheDay from "./components/Main/PhotoOfTheDay";
 import InformationField from "./components/Main/InformationField";
 import Wrapper from "./components/Main/Wrapper";
+import "./App.css";
+import Header from "./components/Main/Header";
 
 export class App extends Component {
   _debouncedScreenSizesUpdater = debounce(() => {
@@ -39,35 +41,12 @@ export class App extends Component {
   };
 
   render() {
-    const { screenSizes } = this.props;
     const deviceType = this._determineDeviceType();
     return (
-      <div>
-        screenSize
-        <div>width: {screenSizes.viewPortWidth}</div>
-        <div>height: {screenSizes.viewPortHeight}</div>
-        <div>
-          {deviceType === 1 && <Mobile />}
-          {deviceType === 2 && <Tablet />}
-          {deviceType === 3 && <Desktop />}
-        </div>
-        <div>
-          <PhotoOfTheDay image="https://pp.userapi.com/c845321/v845321466/4ffc0/POC4p8QbgKU.jpg">
-            <Wrapper>
-              <div
-                style={{ width: "100%", height: "100px", background: "yellow" }}
-              >
-                1
-              </div>
-            </Wrapper>
-            <InformationField>
-              <div>Unsplash-Clone by Aitkazy Yerassyl</div>
-              <div>yerassyl@gmail.com</div>
-              <div>+77774836984</div>
-            </InformationField>
-          </PhotoOfTheDay>
-        </div>
-      </div>
+      <Fragment>
+        <Header />
+        <div>content</div>
+      </Fragment>
     );
   }
 }
