@@ -47,7 +47,7 @@ export class App extends Component {
     }
   };
 
-  componentWillMount = () => {
+  componentWillUnmount = () => {
     window.removeEventListener("resize", this._debouncedScreenSizesUpdater);
   };
 
