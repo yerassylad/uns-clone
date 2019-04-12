@@ -7,9 +7,6 @@ import updateDeviceType from "./actions/Core/updateDeviceType";
 import Desktop from "./components/Desktop";
 import Tablet from "./components/Tablet";
 import Mobile from "./components/Mobile";
-import PhotoOfTheDay from "./components/Main/PhotoOfTheDay";
-import InformationField from "./components/Main/InformationField";
-import Wrapper from "./components/Main/Wrapper";
 import "./App.css";
 import Header from "./components/Main/Header";
 
@@ -55,17 +52,21 @@ export class App extends Component {
   };
 
   render() {
+    const { deviceType } = this.props;
     return (
       <Fragment>
         <Header />
-        <div>content</div>
+        {deviceType === 1 && <Mobile />}
+        {deviceType === 2 && <Tablet />}
+        {deviceType === 3 && <Desktop />}
       </Fragment>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  screenSizes: state.core.screenSizes
+  screenSizes: state.core.screenSizes,
+  deviceType: state.core.deviceType
 });
 
 export default connect(
