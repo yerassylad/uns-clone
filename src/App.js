@@ -6,6 +6,8 @@ import updateScreenSizes from "./actions/Core/updateScreenSizes";
 import Desktop from "./components/Desktop";
 import Tablet from "./components/Tablet";
 import Mobile from "./components/Mobile";
+import PhotoOfTheDay from "./components/Main/PhotoOfTheDay";
+import asd from "./static/media/boxed-water-is-better-1464026-unsplash.jpg";
 
 export class App extends Component {
   _debouncedScreenSizesUpdater = debounce(() => {
@@ -47,6 +49,13 @@ export class App extends Component {
           {deviceType === 1 && <Mobile />}
           {deviceType === 2 && <Tablet />}
           {deviceType === 3 && <Desktop />}
+        </div>
+        <div>
+          <PhotoOfTheDay image="https://pp.userapi.com/c845321/v845321466/4ffc0/POC4p8QbgKU.jpg">
+            <div>1</div>
+            <div>1</div>
+            <div>1</div>
+          </PhotoOfTheDay>
         </div>
       </div>
     );
