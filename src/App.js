@@ -7,7 +7,8 @@ import Desktop from "./components/Desktop";
 import Tablet from "./components/Tablet";
 import Mobile from "./components/Mobile";
 import PhotoOfTheDay from "./components/Main/PhotoOfTheDay";
-import asd from "./static/media/boxed-water-is-better-1464026-unsplash.jpg";
+import InformationField from "./components/Main/InformationField";
+import Wrapper from "./components/Main/Wrapper";
 
 export class App extends Component {
   _debouncedScreenSizesUpdater = debounce(() => {
@@ -52,9 +53,18 @@ export class App extends Component {
         </div>
         <div>
           <PhotoOfTheDay image="https://pp.userapi.com/c845321/v845321466/4ffc0/POC4p8QbgKU.jpg">
-            <div>1</div>
-            <div>1</div>
-            <div>1</div>
+            <Wrapper>
+              <div
+                style={{ width: "100%", height: "100px", background: "yellow" }}
+              >
+                1
+              </div>
+            </Wrapper>
+            <InformationField>
+              <div>Unsplash-Clone by Aitkazy Yerassyl</div>
+              <div>yerassyl@gmail.com</div>
+              <div>+77774836984</div>
+            </InformationField>
           </PhotoOfTheDay>
         </div>
       </div>

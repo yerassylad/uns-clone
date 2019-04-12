@@ -5,7 +5,7 @@ const PhotoOfTheDay = styled("div")`
   flex-direction: column;
   box-sizing: border-box;
   width: 100%;
-  height: ${props => (props.height ? props.height : "500px")};
+  min-height: 1px;
   background-color: rgba(0, 0, 0, 0.3);
   &:after {
     content: "";
