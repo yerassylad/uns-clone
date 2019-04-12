@@ -4,9 +4,7 @@ import determineScreenSize from "./libs/determineScreenSize";
 import debounce from "./libs/debounce";
 import updateScreenSizes from "./actions/Core/updateScreenSizes";
 import updateDeviceType from "./actions/Core/updateDeviceType";
-import Desktop from "./components/Desktop";
-import Tablet from "./components/Tablet";
-import Mobile from "./components/Mobile";
+import Content from "./components/Main/Content";
 import "./App.css";
 import Header from "./components/Main/Header";
 
@@ -56,9 +54,7 @@ export class App extends Component {
     return (
       <Fragment>
         <Header />
-        {deviceType === 1 && <Mobile />}
-        {deviceType === 2 && <Tablet />}
-        {deviceType === 3 && <Desktop />}
+        <Content />
       </Fragment>
     );
   }
