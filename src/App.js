@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import determineScreenSize from "./libs/determineScreenSize";
 import debounce from "./libs/debounce";
 import updateScreenSizes from "./actions/Core/updateScreenSizes";
+import updateDeviceType from "./actions/Core/updateDeviceType";
 import Desktop from "./components/Desktop";
 import Tablet from "./components/Tablet";
 import Mobile from "./components/Mobile";
@@ -18,6 +19,12 @@ export class App extends Component {
     const screenSizes = determineScreenSize();
     updateScreenSizes(screenSizes);
   }, 150);
+
+  _deviceTypeUpdater = () => {
+    const { updateDeviceType } = this.props;
+    const deviceType = this._determineDeviceType();
+    updateDeviceType(deviceType);
+  };
 
   _determineDeviceType = () => {
     const { screenSizes } = this.props;
@@ -36,12 +43,18 @@ export class App extends Component {
     this._debouncedScreenSizesUpdater();
   };
 
+  componentDidUpdate = prevProps => {
+    const { screenSizes } = this.props;
+    if (screenSizes !== prevProps.screenSizes) {
+      this._deviceTypeUpdater();
+    }
+  };
+
   componentWillMount = () => {
     window.removeEventListener("resize", this._debouncedScreenSizesUpdater);
   };
 
   render() {
-    const deviceType = this._determineDeviceType();
     return (
       <Fragment>
         <Header />
@@ -57,5 +70,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { updateScreenSizes }
+  { updateScreenSizes, updateDeviceType }
 )(App);
