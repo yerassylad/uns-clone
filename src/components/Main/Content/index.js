@@ -2,7 +2,7 @@ import React from "react";
 import SearchBar from "../SearchBar";
 
 const Content = () => {
-  return <SearchBar />;
+  return <div />
 };
 
 export default Content;

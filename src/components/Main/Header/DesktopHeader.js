@@ -1,19 +1,16 @@
 import React from "react";
 import HeaderElement from "./HeaderElement";
+import Grid from '../Grid';
+import Logo from  '../Logo'
+import SearchBar from '../SearchBar'
 
 const DesktopHeader = () => {
   return (
     <HeaderElement height="60px">
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          backgroundColor: "green",
-          color: "brown"
-        }}
-      >
-        Desktop
-      </div>
+      <Grid>
+        <Logo />
+        <SearchBar />
+      </Grid>
     </HeaderElement>
   );
 };

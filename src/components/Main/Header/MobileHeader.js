@@ -1,21 +1,15 @@
-import React from "react";
+import React, { Component } from 'react';
 import HeaderElement from "./HeaderElement";
 
-const MobileHeader = props => {
-  return (
-    <HeaderElement height="20px">
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          backgroundColor: "black",
-          color: "white"
-        }}
-      >
-        Mobile
+export class MobileHeader extends Component {
+  render() {
+    return (
+      <div>
+        
       </div>
-    </HeaderElement>
-  );
-};
+    )
+  }
+}
 
-export default MobileHeader;
+export default MobileHeader
+
