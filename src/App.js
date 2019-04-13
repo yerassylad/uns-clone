@@ -7,6 +7,7 @@ import updateDeviceType from "./actions/Core/updateDeviceType";
 import Content from "./components/Main/Content";
 import "./App.css";
 import Header from "./components/Main/Header";
+import MobileHeader from './components/Mobile/MobileHeader'
 
 export class App extends Component {
   _debouncedScreenSizesUpdater = debounce(() => {
@@ -55,6 +56,7 @@ export class App extends Component {
       <Fragment>
         <Header />
         <Content />
+        <MobileHeader />
       </Fragment>
     );
   }

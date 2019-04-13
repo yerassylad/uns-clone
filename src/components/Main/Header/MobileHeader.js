@@ -1,15 +1,32 @@
-import React, { Component } from 'react';
-import HeaderElement from "./HeaderElement";
+import React from 'react'
+import withSearchField from '../../../HOCs/withSearchField'
 
-export class MobileHeader extends Component {
-  render() {
-    return (
-      <div>
-        
-      </div>
-    )
-  }
+const Open = props => {
+  const {onOpen} = props;
+  return (
+    <div>
+      <button onClick={onOpen}>Open</button>
+    </div>
+  );
+}
+
+const Close = props => {
+  const {onClose} = props;
+  return (
+    <div>
+      <button onClick={onClose}>Close</button>
+    </div>
+  );
+}
+
+const OpenWithSearchField = withSearchField(Open, Close);
+
+const MobileHeader = () => {
+  return (
+    <div>
+      <OpenWithSearchField></OpenWithSearchField>
+    </div>
+  )
 }
 
 export default MobileHeader
-
