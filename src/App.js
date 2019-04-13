@@ -56,7 +56,7 @@ export class App extends Component {
       <Fragment>
         <Header />
         <Content />
-        <MobileHeader />
+        <div>content</div>
       </Fragment>
     );
   }

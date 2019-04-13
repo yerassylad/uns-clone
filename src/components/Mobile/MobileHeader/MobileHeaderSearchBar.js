@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import Grid from '../../Main/Grid'
+import SearchBar from '../../Main/SearchBar'
 
 const MobileHeaderSearchBar = props => {
     const {onClose} = props;
@@ -7,11 +9,11 @@ const MobileHeaderSearchBar = props => {
         onClose && onClose();
     }
     return (
-        <div>
-            <span>asdasd</span>
-            <span><button onClick={handleCancelButtonClick}>asdasd</button></span>
-        </div>
+        <Grid alignContent="space-between" alignItems="center">
+            <SearchBar />
+            <button onClick={handleCancelButtonClick}>cancel</button>
+        </Grid>
     )
 }
 
-export default MobileHeaderSearchBar
+export default MobileHeaderSearchBar;

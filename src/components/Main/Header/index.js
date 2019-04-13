@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import DesktopHeader from "./DesktopHeader";
 import LaptopHeader from "./LaptopHeader";
-import MobileHeader from "./MobileHeader";
+import MobileHeader from '../../Mobile/MobileHeader'
 
 export class Header extends Component {
   render() {
