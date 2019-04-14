@@ -29,7 +29,7 @@ export class Content extends Component {
   })
 
   componentDidUpdate = (prevProps, prevState) => {
-    console.log(prevState.imagesArray);
+    console.log(this.state.imagesArray);
   }
 
   render() {
@@ -40,9 +40,12 @@ export class Content extends Component {
         return (
           <PhotoStackContainer>
               <PhotoStackColumn>
-                {imagesSpreadedIntoColumns.map((imageUrl,index) => (
-                  <PhotoStackImage  key={imageUrl} src={imageUrl} alt={`image-${index}`} />
-                ))}
+                {imagesSpreadedIntoColumns.map((imageUrl,index) => {
+                  if (imagesSpreadedIntoColumns.length - 1 === index) {
+                    return <PhotoStackPrelastImage onShow={this.expandImagesArray} key={imageUrl} src={imageUrl} alt={`image-${index}`} />
+                  }
+                  return <PhotoStackImage  key={imageUrl} src={imageUrl} alt={`image-${index}`} />
+      })}
               </PhotoStackColumn>
           </PhotoStackContainer>
         );
