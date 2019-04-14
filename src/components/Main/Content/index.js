@@ -1,9 +1,10 @@
-import React from "react";
-import {connect} from 'react-redux'
-import PhotoStackContainer from '../PhotosStack/PhotoStackContainer'
-import PhotoStackColumn from '../PhotosStack/PhotoStackColumn'
-import PhotoStackImage from '../PhotosStack/PhotoStackImage'
-import spreadArray from '../../../libs/spreadArray'
+import React, { Component } from "react";
+import {connect} from 'react-redux';
+import PhotoStackContainer from '../PhotosStack/PhotoStackContainer';
+import PhotoStackColumn from '../PhotosStack/PhotoStackColumn';
+import PhotoStackImage from '../PhotosStack/PhotoStackImage';
+import spreadArray from '../../../libs/spreadArray';
+import PhotoStackPrelastImage from '../PhotosStack/PhotoStackPrelastImage'
 
 const testArray = [
   "https://pp.userapi.com/c845016/v845016889/d5fe4/4xjadZzVihk.jpg",
@@ -18,39 +19,57 @@ const testArray = [
   "https://pp.userapi.com/c846323/v846323472/1cc876/sgfEorVQqHc.jpg",
 ]
 
-const Content = props => {
-  const {columns, imagesArray} = props;
-  const imagesSpreadedIntoColumns = spreadArray(columns, imagesArray);
-  console.log('updated', columns);
-  if (columns === 1) {
-    return (
+export class Content extends Component {
+  state = {
+    imagesArray: testArray  
+  }
+
+  expandImagesArray = () => this.setState({
+    imagesArray: [...this.state.imagesArray, ...testArray]
+  })
+
+  componentDidUpdate = (prevProps, prevState) => {
+    console.log(prevState.imagesArray);
+  }
+
+  render() {
+      const {columns} = this.props;
+      const {imagesArray} = this.state;
+      const imagesSpreadedIntoColumns = spreadArray(columns, imagesArray);
+      if (columns === 1) {
+        return (
+          <PhotoStackContainer>
+              <PhotoStackColumn>
+                {imagesSpreadedIntoColumns.map((imageUrl,index) => (
+                  <PhotoStackImage  key={imageUrl} src={imageUrl} alt={`image-${index}`} />
+                ))}
+              </PhotoStackColumn>
+          </PhotoStackContainer>
+        );
+      }
+      return (
       <PhotoStackContainer>
-          <PhotoStackColumn>
-            {imagesSpreadedIntoColumns.map((imageUrl,index) => (
-              <PhotoStackImage key={imageUrl} src={imageUrl} alt={`image-${index}`} />
-            ))}
+        {imagesSpreadedIntoColumns.map((column, index) => (
+          <PhotoStackColumn key={`column-${index}`}>
+            {column.map((imageUrl,index) => {
+              if (column.length - 1 === index) {
+                return (
+                  <PhotoStackPrelastImage key={imageUrl} onShow={this.expandImagesArray} src={imageUrl} alt={`image-${index}`} />
+                );
+              }
+              return <PhotoStackImage key={imageUrl} src={imageUrl} alt={`image-${index}`} />;
+        })}
           </PhotoStackColumn>
+        ))}
       </PhotoStackContainer>
     );
   }
-  return (
-  <PhotoStackContainer>
-    {imagesSpreadedIntoColumns.map((column, index) => (
-      <PhotoStackColumn key={`column-${index}`}>
-        {column.map((imageUrl,index) => (
-          <PhotoStackImage key={imageUrl} src={imageUrl} alt={`image-${index}`} />
-        ))}
-      </PhotoStackColumn>
-    ))}
-  </PhotoStackContainer>
-  );
-};
+}
 
 // device type numbers equal to column numbers
 
 const mapStateToProps = state => ({
   columns: state.core.deviceType,
-  imagesArray: testArray
-})
+});
 
 export default connect(mapStateToProps)(Content);

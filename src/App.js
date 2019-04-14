@@ -17,18 +17,6 @@ export class App extends Component {
     updateScreenSizes(screenSizes);
   }, 150);
 
-  isBottom(el) {
-    console.log(el);
-    return el.getBoundingClientRect().bottom <= window.innerHeight;
-  }
-
-  trackScrolling = () => {
-    const wrappedElement = document.getElementById('header');
-    if (this.isBottom(wrappedElement)) {
-      console.log('header bottom reached');
-    }
-  };
-
   _deviceTypeUpdater = () => {
     const { updateDeviceType } = this.props;
     const deviceType = this._determineDeviceType();
@@ -50,7 +38,6 @@ export class App extends Component {
   componentDidMount = () => {
     window.addEventListener("resize", this._debouncedScreenSizesUpdater);
     this._debouncedScreenSizesUpdater();
-    document.addEventListener('scroll', this.trackScrolling);
   };
 
   componentDidUpdate = prevProps => {
@@ -58,7 +45,6 @@ export class App extends Component {
     if (screenSizes !== prevProps.screenSizes) {
       this._deviceTypeUpdater();
     }
-    document.removeEventListener('scroll', this.trackScrolling);
   };
 
   componentWillUnmount = () => {
@@ -71,11 +57,6 @@ export class App extends Component {
       <Fragment>
         <Header />
         <Content />
-        <div id="header">header</div>
-        <br />
-        <br />
-        <br />
-        <br />
       </Fragment>
     );
   }
