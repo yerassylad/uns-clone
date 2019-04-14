@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import DesktopHeader from "./DesktopHeader";
 import LaptopHeader from "./LaptopHeader";
@@ -8,11 +8,11 @@ export class Header extends Component {
   render() {
     const { deviceType } = this.props;
     return (
-      <Fragment>
+      <div>
         {deviceType === 1 && <MobileHeader />}
         {deviceType === 2 && <LaptopHeader />}
         {deviceType === 3 && <DesktopHeader />}
-      </Fragment>
+      </div>
     );
   }
 }
